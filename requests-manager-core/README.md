@@ -1,0 +1,1 @@
+# Requests Manager - Core

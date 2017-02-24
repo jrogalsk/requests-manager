@@ -1,0 +1,75 @@
+<?xml version="1.0"?>
+<!DOCTYPE module PUBLIC "-//Puppy Crawl//DTD Check Configuration 1.2//EN"
+		"http://www.puppycrawl.com/dtds/configuration_1_2.dtd">
+<module name="Checker">
+	<property name="localeLanguage" value="en"/>
+
+	<module name="TreeWalker">
+
+		<module name="UnusedImports"/>
+		<module name="AvoidStarImport"/>
+		<module name="RedundantImport"/>
+		<module name="EqualsHashCode"/>
+		<module name="IllegalInstantiation"/>
+		<module name="ModifierOrder"/>
+		<module name="GenericWhitespace"/>
+		<module name="PackageAnnotation"/>
+		<module name="CovariantEquals"/>
+		<module name="ModifiedControlVariable"/>
+		<module name="OneStatementPerLine"/>
+		<module name="EmptyStatement"/>
+		<module name="DefaultComesLast"/>
+		<module name="WhitespaceAround"/>
+		<module name="TypecastParenPad"/>
+		<module name="DeclarationOrder"/>
+		<module name="RedundantModifier"/>
+		<module name="WhitespaceAfter"/>
+
+		<module name="MethodParamPad">
+			<property name="option" value="nospace"/>
+			<property name="allowLineBreaks" value="false"/>
+		</module>
+
+		<module name="LeftCurly">
+			<property name="option" value="eol"/>
+		</module>
+
+		<module name="RightCurly">
+			<property name="option" value="alone"/>
+		</module>
+
+		<module name="EmptyLineSeparator">
+			<property name="allowNoEmptyLineBetweenFields" value="true"/>
+			<property name="allowMultipleEmptyLines" value="false"/>
+			<property name="tokens"
+			          value="IMPORT, CLASS_DEF, INTERFACE_DEF, ENUM_DEF, STATIC_INIT, INSTANCE_INIT, METHOD_DEF, CTOR_DEF, VARIABLE_DEF"/>
+		</module>
+	</module>
+
+	<module name="RegexpMultiline">
+		<property name="format" value="\S\z"/>
+		<property name="message" value="Expected new line at the end of file"/>
+	</module>
+
+	<module name="RegexpMultiline">
+		<property name="format" value="\S((\r\n\r\n)|(\r\r)|(\n\n)|(\n\r\n\r))\z"/>
+		<property name="message" value="Only single empty line can be placed at the end of file"/>
+	</module>
+
+	<module name="RegexpMultiline">
+		<property name="format" value="^[{]([ \t]*((\r\n)|(\n))[ \t]*){2,}}"/>
+		<property name="message" value="Blank line before closing bracket"/>
+	</module>
+
+	<module name="RegexpMultiline">
+		<property name="format" value="\[(((\n)|(\r\n))[\t]*){2,}[^\t*\}]"/>
+		<property name="message" value="Blank line after opening racket"/>
+	</module>
+
+	<module name="RegexpSingleline">
+		<property name="format" value="\s+$"/>
+		<property name="message" value="White spaces at the end of line"/>
+	</module>
+
+
+</module>
