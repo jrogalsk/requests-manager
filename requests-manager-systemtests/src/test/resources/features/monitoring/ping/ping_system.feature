@@ -1,4 +1,4 @@
-Feature: Ping System Feature
+Feature: Ping System
 
   Ping is the simplest method which allows to verify if the system is up and running.
   It has no business value and shall be used for basic monitoring.

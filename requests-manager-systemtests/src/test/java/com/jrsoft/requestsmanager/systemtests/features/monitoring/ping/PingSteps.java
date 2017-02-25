@@ -1,22 +1,19 @@
 package com.jrsoft.requestsmanager.systemtests.features.monitoring.ping;
 
 import io.restassured.response.Response;
-import net.thucydides.core.annotations.Step;
 
 import static org.hamcrest.core.Is.is;
 
-public class PingFeatureSteps {
+public class PingSteps {
     private final PingResourceDriver pingResourceDriver = new PingResourceDriver();
 
     private Response pingResponse;
     private int expectedReturnCode;
 
-    @Step
     public void pingSystem() {
         this.setPingResponse(this.pingResourceDriver().callPingResource());
     }
 
-    @Step
     public void verifyThatRespondedWith(String aText) {
         this.pingResponse().then()
                 .statusCode(is(this.expectedReturnCode()))
