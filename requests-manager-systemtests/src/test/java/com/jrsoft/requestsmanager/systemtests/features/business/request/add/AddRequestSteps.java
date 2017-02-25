@@ -1,15 +1,14 @@
 package com.jrsoft.requestsmanager.systemtests.features.business.request.add;
 
-import com.jrsoft.requestsmanager.systemtests.features.business.request.common.RequestResourceDriver;
+import com.jrsoft.requestsmanager.systemtests.features.business.request.common.RequestFeatureSteps;
 import io.restassured.response.Response;
 
 import static org.hamcrest.core.Is.is;
 
-public class AddRequestSteps {
-    private RequestResourceDriver requestResourceDriver = new RequestResourceDriver();
-
+public class AddRequestSteps extends RequestFeatureSteps {
     private String title;
     private String content;
+    private String createdRequestId;
 
     private Response response;
 
@@ -27,17 +26,12 @@ public class AddRequestSteps {
     public void verifyThatRequestWasAddedToTheSystem() {
         this.response().then()
                 .statusCode(is(201));
+        this.setCreatedRequestId(this.extractNewRequestId());
     }
 
     public void verifyThatRequestWasNotAddedToTheSystem() {
         this.response().then()
                 .statusCode(is(400));
-    }
-
-    public void verifyThatCanViewDetailsOfCreatedRequest() {
-        this.requestResourceDriver()
-                .fetchRequestWithId(this.extractNewRequestId())
-                .then().statusCode(200);
     }
 
     private String extractNewRequestId() {
@@ -54,15 +48,11 @@ public class AddRequestSteps {
         this.content = aContent;
     }
 
-    private RequestResourceDriver requestResourceDriver() {
-        return this.requestResourceDriver;
-    }
-
-    private String title() {
+    public String title() {
         return this.title;
     }
 
-    private String content() {
+    public String content() {
         return this.content;
     }
 
@@ -74,4 +64,11 @@ public class AddRequestSteps {
         return this.response;
     }
 
+    private void setCreatedRequestId(String aRequestId) {
+        this.createdRequestId = aRequestId;
+    }
+
+    public String getCreatedRequestId() {
+        return createdRequestId;
+    }
 }

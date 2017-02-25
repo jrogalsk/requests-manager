@@ -4,6 +4,7 @@ public class Request {
     private String id;
     private final String title;
     private final String content;
+    private final RequestState state = RequestState.CREATED;
 
     public Request(String title, String content) {
         this.title = title;
@@ -24,6 +25,10 @@ public class Request {
 
     public String getContent() {
         return this.content;
+    }
+
+    public RequestState getState() {
+        return this.state;
     }
 
 }
