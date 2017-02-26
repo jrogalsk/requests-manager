@@ -3,18 +3,18 @@ package com.jrsoft.requestsmanager.systemtests.features.business.transition;
 import com.jrsoft.requestsmanager.systemtests.features.business.commons.RequestsManagerFeatureSteps;
 import io.restassured.response.Response;
 
-public class TransitionRequestStatusSteps extends RequestsManagerFeatureSteps {
+public class TransitionRequestStateSteps extends RequestsManagerFeatureSteps {
     private String requestId;
 
     private Response response;
 
-    public TransitionRequestStatusSteps forRequestWithId(String aRequestId) {
+    public TransitionRequestStateSteps forRequestWithId(String aRequestId) {
         this.setRequestId(aRequestId);
 
         return this;
     }
 
-    public TransitionRequestStatusSteps invokeStateChangeAction(String aChangeStateAction) {
+    public TransitionRequestStateSteps invokeStateChangeAction(String aChangeStateAction) {
         Response response = this.requestManagerResourceDriver()
                 .invokeChangeStateAction(this.requestId(), aChangeStateAction);
         this.setResponse(response);
@@ -22,14 +22,14 @@ public class TransitionRequestStatusSteps extends RequestsManagerFeatureSteps {
         return this;
     }
 
-    public TransitionRequestStatusSteps verifyThatTransitionWasSuccessful() {
+    public TransitionRequestStateSteps verifyThatTransitionWasSuccessful() {
         this.response().then()
                 .statusCode(202);
 
         return this;
     }
 
-    public TransitionRequestStatusSteps verifyThatTransitionWasRejected() {
+    public TransitionRequestStateSteps verifyThatTransitionWasRejected() {
         this.response().then()
                 .statusCode(400);
 

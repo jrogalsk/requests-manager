@@ -1,11 +1,11 @@
-package com.jrogalsk.requestsmanager.core.business.domain.transition;
+package com.jrogalsk.requestsmanager.core.business.domain.statetransition;
 
 import com.jrogalsk.requestsmanager.core.business.domain.request.Request;
-import com.jrogalsk.requestsmanager.core.business.domain.request.State;
 
 import java.util.Objects;
 
 import static java.util.Objects.hash;
+import static java.util.Objects.isNull;
 
 public class StateTransition {
     private final State startState;
@@ -18,9 +18,9 @@ public class StateTransition {
         this.targetState = aTargetState;
     }
 
-    public void runOn(Request request) {
+    public void runOn(Request request, String stateChangeJustification) {
         if (request.getState() == this.getStartState()) {
-            request.setState(this.getTargetState());
+            request.addStateTransitionHistoryEntry(this.createHistoryEntry(stateChangeJustification));
         }
         else {
             throw new IllegalArgumentException(
@@ -38,6 +38,13 @@ public class StateTransition {
 
     public State getTargetState() {
         return this.targetState;
+    }
+
+    private StateTransitionHistoryEntry createHistoryEntry(String stateChangeJustification) {
+        return new StateTransitionHistoryEntry(
+                this.getStartState(),
+                this.getTargetState(),
+                isNull(stateChangeJustification) ? "" : stateChangeJustification);
     }
 
     @Override

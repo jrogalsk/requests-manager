@@ -5,10 +5,12 @@ import com.jrsoft.requestsmanager.systemtests.features.business.request.viewdeta
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 
-public class RequestStatusTransitionFeatureDefinition {
+import java.util.List;
+
+public class RequestStateTransitionFeatureDefinition {
     private AddRequestSteps addRequestSteps = new AddRequestSteps();
     private ViewDetailsSteps viewDetailsSteps = new ViewDetailsSteps();
-    private TransitionRequestStatusSteps transitionRequestStatusSteps = new TransitionRequestStatusSteps();
+    private TransitionRequestStateSteps transitionRequestStateSteps = new TransitionRequestStateSteps();
 
     @Given("Jim has new request with state '(.*)'")
     public void jim_has_new_request_with_state(String aState) {
@@ -50,6 +52,14 @@ public class RequestStatusTransitionFeatureDefinition {
                 .verifyThatTransitionWasSuccessful();
     }
 
+    @Then("^this request has history entries for states in following order: (.*)$")
+    public void this_request_has_history_entries_for_states(List<String> states) {
+        this.viewDetailsSteps()
+                .fetchDetailsOfRequestWithId(this.getTestedRequestId())
+                .verifyThatRequestExists()
+                .andItHasStatesHistoryFor(states);
+    }
+
     private String getTestedRequestId() {
         return this.addRequestSteps().getCreatedRequestId();
     }
@@ -62,7 +72,7 @@ public class RequestStatusTransitionFeatureDefinition {
         return this.viewDetailsSteps;
     }
 
-    private TransitionRequestStatusSteps transitionRequestStatusSteps() {
-        return this.transitionRequestStatusSteps;
+    private TransitionRequestStateSteps transitionRequestStatusSteps() {
+        return this.transitionRequestStateSteps;
     }
 }

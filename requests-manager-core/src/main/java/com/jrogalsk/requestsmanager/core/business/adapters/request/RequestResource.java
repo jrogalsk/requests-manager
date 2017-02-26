@@ -3,8 +3,8 @@ package com.jrogalsk.requestsmanager.core.business.adapters.request;
 import com.jrogalsk.requestsmanager.core.business.application.RequestStateTransitionService;
 import com.jrogalsk.requestsmanager.core.business.domain.request.Request;
 import com.jrogalsk.requestsmanager.core.business.domain.request.RequestsRepository;
-import com.jrogalsk.requestsmanager.core.business.domain.transition.IllegalStateTransitionException;
-import com.jrogalsk.requestsmanager.core.business.domain.transition.StateTransitionTrigger;
+import com.jrogalsk.requestsmanager.core.business.domain.statetransition.IllegalStateTransitionException;
+import com.jrogalsk.requestsmanager.core.business.domain.statetransition.StateTransitionTrigger;
 
 import javax.inject.Inject;
 import javax.validation.constraints.Size;
@@ -44,25 +44,33 @@ public class RequestResource {
 
     @GET
     @Path("{requestId}")
-    public Request fetchRequestWithId(@PathParam("requestId") String aRequestId) {
-        return this.requestsRepository()
-                .findWithId(aRequestId)
-                .orElseThrow(() -> new WebApplicationException(404));
+    public Response fetchRequestWithId(@PathParam("requestId") String aRequestId) {
+        return Response
+                .ok(this.fetchRequestFromRepository(aRequestId))
+                .build();
     }
 
     @POST
     @Path("{requestId}")
     public Response changeRequestState(@PathParam("requestId") String aRequestId,
-                                       @FormParam("action") StateTransitionTrigger stateTransitionTrigger) {
+                                       @FormParam("action") StateTransitionTrigger stateTransitionTrigger,
+                                       @FormParam("actionJustification") String stateTransitionJustification) {
         try {
-            Request request = this.fetchRequestWithId(aRequestId);
-            this.requestStateTransitionService().performTransition(request, stateTransitionTrigger);
+            Request request = this.fetchRequestFromRepository(aRequestId);
+            this.requestStateTransitionService()
+                    .performTransition(request, stateTransitionTrigger, stateTransitionJustification);
 
             return Response.accepted().build();
         }
         catch (IllegalStateTransitionException exception) {
             throw new WebApplicationException(exception.getMessage(), 400);
         }
+    }
+
+    private Request fetchRequestFromRepository(String aRequestId) {
+        return this.requestsRepository()
+                .findWithId(aRequestId)
+                .orElseThrow(() -> new WebApplicationException(404));
     }
 
     private RequestsRepository requestsRepository() {

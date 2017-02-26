@@ -30,7 +30,7 @@ public class VolatileRequestsRepository implements RequestsRepository {
         try {
             return this.allRequests().get(Integer.parseInt(id));
         }
-        catch (IndexOutOfBoundsException e) {
+        catch (IndexOutOfBoundsException | NumberFormatException e) {
             return null;
         }
     }

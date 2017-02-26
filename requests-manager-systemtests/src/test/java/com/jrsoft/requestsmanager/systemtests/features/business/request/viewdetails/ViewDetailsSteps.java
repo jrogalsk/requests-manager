@@ -3,7 +3,12 @@ package com.jrsoft.requestsmanager.systemtests.features.business.request.viewdet
 import com.jrsoft.requestsmanager.systemtests.features.business.commons.RequestsManagerFeatureSteps;
 import io.restassured.response.Response;
 
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+
 import static org.hamcrest.core.Is.is;
+import static org.junit.Assert.assertThat;
 
 public class ViewDetailsSteps extends RequestsManagerFeatureSteps {
     private Response response;
@@ -40,6 +45,18 @@ public class ViewDetailsSteps extends RequestsManagerFeatureSteps {
 
     public ViewDetailsSteps andItsStatusIs(String aStatus) {
         this.verifyThatResponseContains("state", aStatus);
+
+        return this;
+    }
+
+    public ViewDetailsSteps andItHasStatesHistoryFor(List<String> expectedStatesHistory) {
+        List<Map<String, String>> mappedStateChangesHistory = response().getBody().path("stateTransitionHistory");
+        List<String> actualStatesHistory = mappedStateChangesHistory
+                .stream()
+                .map(entry -> entry.get("to"))
+                .collect(Collectors.toList());
+
+        assertThat(actualStatesHistory, is(expectedStatesHistory));
 
         return this;
     }

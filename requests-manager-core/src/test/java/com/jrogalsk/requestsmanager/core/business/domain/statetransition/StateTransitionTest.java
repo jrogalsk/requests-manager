@@ -1,7 +1,6 @@
-package com.jrogalsk.requestsmanager.core.business.domain.transition;
+package com.jrogalsk.requestsmanager.core.business.domain.statetransition;
 
 import com.jrogalsk.requestsmanager.core.business.domain.request.Request;
-import com.jrogalsk.requestsmanager.core.business.domain.request.State;
 import org.junit.Test;
 
 import static org.hamcrest.core.Is.is;
@@ -31,7 +30,8 @@ public class StateTransitionTest {
     public void performTransition() {
         Request request = new Request("moo", "boo");
 
-        new StateTransition(State.CREATED, StateTransitionTrigger.DELETE, State.DELETED).runOn(request);
+        new StateTransition(State.CREATED, StateTransitionTrigger.DELETE, State.DELETED)
+                .runOn(request, "");
 
         assertThat(request.getState(), is(State.DELETED));
     }
@@ -40,7 +40,8 @@ public class StateTransitionTest {
     public void doNotPerformTransitionIfRequestHasUnsupportedState() {
         Request request = new Request("moo", "boo");
 
-        new StateTransition(State.REJECTED, StateTransitionTrigger.DELETE, State.DELETED).runOn(request);
+        new StateTransition(State.REJECTED, StateTransitionTrigger.DELETE, State.DELETED)
+                .runOn(request, "");
     }
 
 }

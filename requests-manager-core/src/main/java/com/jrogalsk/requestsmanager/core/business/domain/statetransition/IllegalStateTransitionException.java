@@ -1,6 +1,4 @@
-package com.jrogalsk.requestsmanager.core.business.domain.transition;
-
-import com.jrogalsk.requestsmanager.core.business.domain.request.State;
+package com.jrogalsk.requestsmanager.core.business.domain.statetransition;
 
 public class IllegalStateTransitionException extends RuntimeException {
     public IllegalStateTransitionException(State aState, StateTransitionTrigger aStateTransitionTrigger) {

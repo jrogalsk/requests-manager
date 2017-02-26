@@ -1,6 +1,4 @@
-package com.jrogalsk.requestsmanager.core.business.domain.transition;
-
-import com.jrogalsk.requestsmanager.core.business.domain.request.State;
+package com.jrogalsk.requestsmanager.core.business.domain.statetransition;
 
 import java.util.Arrays;
 import java.util.List;

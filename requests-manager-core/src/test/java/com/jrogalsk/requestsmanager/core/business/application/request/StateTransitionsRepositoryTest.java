@@ -1,10 +1,10 @@
 package com.jrogalsk.requestsmanager.core.business.application.request;
 
-import com.jrogalsk.requestsmanager.core.business.domain.transition.IllegalStateTransitionException;
-import com.jrogalsk.requestsmanager.core.business.domain.request.State;
-import com.jrogalsk.requestsmanager.core.business.domain.transition.StateTransitionTrigger;
-import com.jrogalsk.requestsmanager.core.business.domain.transition.StateTransition;
-import com.jrogalsk.requestsmanager.core.business.domain.transition.StateTransitionsRepository;
+import com.jrogalsk.requestsmanager.core.business.domain.statetransition.IllegalStateTransitionException;
+import com.jrogalsk.requestsmanager.core.business.domain.statetransition.State;
+import com.jrogalsk.requestsmanager.core.business.domain.statetransition.StateTransitionTrigger;
+import com.jrogalsk.requestsmanager.core.business.domain.statetransition.StateTransition;
+import com.jrogalsk.requestsmanager.core.business.domain.statetransition.StateTransitionsRepository;
 import org.junit.Test;
 
 import java.util.ArrayList;
