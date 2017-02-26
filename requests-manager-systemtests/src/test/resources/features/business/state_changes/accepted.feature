@@ -9,13 +9,13 @@ Feature: Change state of accepted request
     And request has state set to 'ACCEPTED'
 
   Scenario Outline: Change state with accepted actions
-    When he performs '<performed_action>' action on this request
+    When he performs '<performed_action>' action on this request with '<justification>' justification
     Then his action is successful
     And request has state set to '<expected_state>'
   Examples:
-    | performed_action | expected_state |
-    | PUBLISH          | PUBLISHED      |
-    | REJECT           | REJECTED       |
+    | performed_action | expected_state | justification |
+    | PUBLISH          | PUBLISHED      |               |
+    | REJECT           | REJECTED       | dummy         |
 
   Scenario Outline: Fail to change state with not accepted actions
     When he performs '<performed_action>' action on this request

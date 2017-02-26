@@ -25,9 +25,10 @@ public class RequestsManagerResourceDriver extends RESTResourceDriver {
         return this.fullPathWith(RequestsManagerResourceDriver.RELATIVE_PATH);
     }
 
-    public Response invokeChangeStateAction(String aRequestId, String aChangeStateAction) {
+    public Response invokeChangeStateAction(String aRequestId, String aChangeStateAction, String justification) {
         return given()
                 .param("action", aChangeStateAction)
+                .param("actionJustification", justification)
                 .post(String.format("%s%s", this.resourcePath(), aRequestId));
     }
 }

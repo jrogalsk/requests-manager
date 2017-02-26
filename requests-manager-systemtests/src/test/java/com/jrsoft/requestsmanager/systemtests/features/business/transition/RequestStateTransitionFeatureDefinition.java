@@ -25,11 +25,18 @@ public class RequestStateTransitionFeatureDefinition {
                 .andItsStatusIs(aState);
     }
 
-    @Given("he performs '(.*)' action on this request")
+    @Given("^he performs '(.*)' action on this request$")
     public void he_performs_operation_on_this_request(String anAction) {
         this.transitionRequestStatusSteps()
                 .forRequestWithId(this.getTestedRequestId())
                 .invokeStateChangeAction(anAction);
+    }
+
+    @Given("he performs '(.*)' action on this request with '(.*)' justification")
+    public void he_performs_operation_on_this_request_with_justification(String anAction, String justification) {
+        this.transitionRequestStatusSteps()
+                .forRequestWithId(this.getTestedRequestId())
+                .invokeStateChangeActionWithJustification(anAction, justification);
     }
 
     @Then("request has state set to '(.*)'")

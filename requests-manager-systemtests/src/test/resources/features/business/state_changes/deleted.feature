@@ -4,7 +4,7 @@ Feature: Change state of deleted request
 
   Background:
     Given Jim has new request with state 'CREATED'
-    When he performs 'DELETE' action on this request
+    When he performs 'DELETE' action on this request with 'dummy' justification
     And request has state set to 'DELETED'
 
   Scenario Outline: Fail to change state with not accepted actions

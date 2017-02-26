@@ -8,13 +8,13 @@ Feature: Change state of verified request
     And request has state set to 'VERIFIED'
 
   Scenario Outline: Change state with accepted actions
-    When he performs '<performed_action>' action on this request
+    When he performs '<performed_action>' action on this request with '<justification>' justification
     Then his action is successful
     And request has state set to '<expected_state>'
   Examples:
-    | performed_action | expected_state |
-    | REJECT           | REJECTED       |
-    | ACCEPT           | ACCEPTED        |
+    | performed_action | expected_state | justification |
+    | REJECT           | REJECTED       | dummy         |
+    | ACCEPT           | ACCEPTED       |               |
 
   Scenario Outline: Fail to change state with not accepted actions
     When he performs '<performed_action>' action on this request

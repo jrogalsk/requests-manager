@@ -5,7 +5,7 @@ Feature: Change state of rejected request
   Background:
     Given Jim has new request with state 'CREATED'
     When he performs 'VERIFY' action on this request
-    And he performs 'REJECT' action on this request
+    And he performs 'REJECT' action on this request with 'dummy' justification
     And request has state set to 'REJECTED'
 
   Scenario Outline: Fail to change state with not accepted actions

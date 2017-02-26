@@ -16,7 +16,15 @@ public class TransitionRequestStateSteps extends RequestsManagerFeatureSteps {
 
     public TransitionRequestStateSteps invokeStateChangeAction(String aChangeStateAction) {
         Response response = this.requestManagerResourceDriver()
-                .invokeChangeStateAction(this.requestId(), aChangeStateAction);
+                .invokeChangeStateAction(this.requestId(), aChangeStateAction, "");
+        this.setResponse(response);
+
+        return this;
+    }
+
+    public TransitionRequestStateSteps invokeStateChangeActionWithJustification(String aChangeStateAction, String justification) {
+        Response response = this.requestManagerResourceDriver()
+                .invokeChangeStateAction(this.requestId(), aChangeStateAction, justification);
         this.setResponse(response);
 
         return this;
@@ -51,5 +59,4 @@ public class TransitionRequestStateSteps extends RequestsManagerFeatureSteps {
     private String requestId() {
         return this.requestId;
     }
-
 }
