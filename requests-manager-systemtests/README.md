@@ -1,4 +1,4 @@
-# # Requests Manager - System Tests
+# Requests Manager System Tests
 Cucumber project dedicated to validate Request Manager Core from clients perspective
 
 ## Set up
