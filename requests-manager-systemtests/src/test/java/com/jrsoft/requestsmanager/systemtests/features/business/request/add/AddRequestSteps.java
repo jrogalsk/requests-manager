@@ -1,37 +1,45 @@
 package com.jrsoft.requestsmanager.systemtests.features.business.request.add;
 
-import com.jrsoft.requestsmanager.systemtests.features.business.request.common.RequestFeatureSteps;
+import com.jrsoft.requestsmanager.systemtests.features.business.commons.RequestsManagerFeatureSteps;
 import io.restassured.response.Response;
 
 import static org.hamcrest.core.Is.is;
 
-public class AddRequestSteps extends RequestFeatureSteps {
+public class AddRequestSteps extends RequestsManagerFeatureSteps {
     private String title;
     private String content;
     private String createdRequestId;
 
     private Response response;
 
-    public void setNewRequestMetadata(String aTitle, String aContent) {
+    public AddRequestSteps setNewRequestMetadata(String aTitle, String aContent) {
         this.setTitle(aTitle);
         this.setContent(aContent);
+
+        return this;
     }
 
-    public void addNewRequestToTheSystem() {
-        Response response = this.requestResourceDriver()
+    public AddRequestSteps addNewRequestToTheSystem() {
+        Response response = this.requestManagerResourceDriver()
                 .addRequestWith(this.title(), this.content());
         this.setResponse(response);
+
+        return this;
     }
 
-    public void verifyThatRequestWasAddedToTheSystem() {
+    public AddRequestSteps verifyThatRequestWasAddedToTheSystem() {
         this.response().then()
                 .statusCode(is(201));
         this.setCreatedRequestId(this.extractNewRequestId());
+
+        return this;
     }
 
-    public void verifyThatRequestWasNotAddedToTheSystem() {
+    public AddRequestSteps verifyThatRequestWasNotAddedToTheSystem() {
         this.response().then()
                 .statusCode(is(400));
+
+        return this;
     }
 
     private String extractNewRequestId() {

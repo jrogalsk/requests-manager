@@ -14,6 +14,6 @@ public class RequestTest {
 
     @Test
     public void whenInitialized_hasStateSetAsCreated() {
-        assertThat(new Request("moo", "boo").getState(), is(RequestState.CREATED));
+        assertThat(new Request("moo", "boo").getState(), is(State.CREATED));
     }
 }

@@ -1,15 +1,15 @@
 package com.jrsoft.requestsmanager.systemtests.features.business.request.viewdetails;
 
-import com.jrsoft.requestsmanager.systemtests.features.business.request.common.RequestFeatureSteps;
+import com.jrsoft.requestsmanager.systemtests.features.business.commons.RequestsManagerFeatureSteps;
 import io.restassured.response.Response;
 
 import static org.hamcrest.core.Is.is;
 
-public class ViewDetailsSteps extends RequestFeatureSteps {
+public class ViewDetailsSteps extends RequestsManagerFeatureSteps {
     private Response response;
 
     public ViewDetailsSteps fetchDetailsOfRequestWithId(String aRequestId) {
-        Response response = this.requestResourceDriver()
+        Response response = this.requestManagerResourceDriver()
                 .fetchRequestWithId(aRequestId);
         this.setResponse(response);
 

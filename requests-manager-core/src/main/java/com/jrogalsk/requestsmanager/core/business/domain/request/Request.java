@@ -4,11 +4,12 @@ public class Request {
     private String id;
     private final String title;
     private final String content;
-    private final RequestState state = RequestState.CREATED;
+    private State state;
 
     public Request(String title, String content) {
         this.title = title;
         this.content = content;
+        this.state = State.CREATED;
     }
 
     public void setId(String id) {
@@ -27,8 +28,11 @@ public class Request {
         return this.content;
     }
 
-    public RequestState getState() {
+    public State getState() {
         return this.state;
     }
 
+    public void setState(State aState) {
+        this.state = aState;
+    }
 }
