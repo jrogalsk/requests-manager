@@ -1,4 +1,4 @@
-# _Requests_ Manager
+# Requests Manager
 Simple web-based application for managing _requests_ filed by users.
 
 ## Requirements
@@ -14,19 +14,21 @@ Simple web-based application for managing _requests_ filed by users.
 ![States diagram](request-states-diagram.png)
 
 ## Request Manager Core
-Web service dedicated for requests management ([more](requests-manager-core/README.md))
+Web service dedicated for requests management ([more](requests-manager-core))
 
 ## Request Manager Acceptance Tests
-Cucumber project dedicated to validate Request Manager Core from clients perspective ([more](requests-manager-systemtests/README.md))
+Cucumber project dedicated to validate Request Manager Core from clients perspective ([more](requests-manager-systemtests))
 
 ## Project progress
-- [x] Adding new request
-- [x] Changing state of request as defined in state diagram
-- [x] Requiring justification when deleting or rejecting request
-- [x] Saving history of request state changes
-- [x] View details of single request
-- [ ] Change request description on CREATED and VERIFIED state
-- [ ] Browse requests with paging and filtering
-- [ ] Generate unique number during publication of request
-- [ ] Store requests in database
+- [x] Adding new _request_
+- [x] Changing _state_ of _request_ as defined in state diagram
+- [x] Requiring justification when _deleting_ or _rejecting_ _request_
+- [x] Saving _history_ of _request_ state changes
+- [x] View details of single _request_
+- [ ] Change _request_ _description_ on _CREATED_ and _VERIFIED_ _state_
+- [ ] Browse _requests_ with paging and filtering
+- [ ] Generate unique number during _publication_ of _request_
+- [ ] Store _requests_ in database
+- [ ] Create UI service
 - [ ] Create Dockerfile for Core service
+- [ ] Create Dockerfile for UI service
