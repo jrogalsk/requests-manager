@@ -20,16 +20,13 @@ Web service dedicated for requests management ([more](requests-manager-core/READ
 Cucumber project dedicated to validate Request Manager Core from clients perspective ([more](requests-manager-systemtests/README.md))
 
 ## Project progress
-
-| Feature | Status |
-| --------|:------:|
-| Add new request | done |
-| Change state of request (as defined in state diagram)| [x] |
-| Require justification when deleting or rejecting request | [x] |
-| Save history of request state changes | [x] |
-| View details of single request | [x] |
-| Change request description on CREATED and VERIFIED state | [] |
-| Browse requests with paging and filtering | [] |
-| Generate unique number during publication of request | [] |
-| Store requests in database | [] |
-| Create Dockerfile  for service | [] |
+- [x] Adding new request
+- [x] Changing state of request as defined in state diagram
+- [x] Requiring justification when deleting or rejecting request
+- [x] Saving history of request state changes
+- [x] View details of single request
+- [ ] Change request description on CREATED and VERIFIED state
+- [ ] Browse requests with paging and filtering
+- [ ] Generate unique number during publication of request
+- [ ] Store requests in database
+- [ ] Create Dockerfile for Core service
