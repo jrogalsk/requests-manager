@@ -30,5 +30,5 @@ Cucumber project dedicated to validate Request Manager Core from clients perspec
 - [ ] Generate unique number during _publication_ of _request_
 - [ ] Store _requests_ in database
 - [ ] Create UI service
-- [ ] Create Dockerfile for Core service
+- [X] Create Dockerfile for Core service
 - [ ] Create Dockerfile for UI service
