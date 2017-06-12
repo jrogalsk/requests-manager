@@ -11,7 +11,7 @@ Simple web-based application for managing _requests_ filed by users.
     * Pagination (default: 10 _request_)
 * When _request_ is _Published_ it shall have unique ID assigned to it
 * _State_ of _request_ can be changed according to diagram
-![States diagram](request-states-diagram.png)
+    * ![States diagram](request-states-diagram.png)
 
 ## Request Manager Core
 Web service dedicated for requests management ([more](requests-manager-core))

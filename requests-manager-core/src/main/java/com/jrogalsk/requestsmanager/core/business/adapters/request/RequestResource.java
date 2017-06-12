@@ -21,6 +21,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriBuilder;
 import javax.ws.rs.core.UriInfo;
+import java.util.List;
 
 @Path("/request")
 @Produces(MediaType.APPLICATION_JSON)
@@ -43,10 +44,17 @@ public class RequestResource {
     }
 
     @GET
+    public Response fetchAllRequests() {
+        return Response
+                .ok(this.fetchExistingRequests())
+                .build();
+    }
+
+    @GET
     @Path("{requestId}")
     public Response fetchRequestWithId(@PathParam("requestId") String aRequestId) {
         return Response
-                .ok(this.fetchRequestFromRepository(aRequestId))
+                .ok(this.fetchRequestFor(aRequestId))
                 .build();
     }
 
@@ -56,7 +64,7 @@ public class RequestResource {
                                        @FormParam("action") StateTransitionTrigger stateTransitionTrigger,
                                        @FormParam("actionJustification") String stateTransitionJustification) {
         try {
-            Request request = this.fetchRequestFromRepository(aRequestId);
+            Request request = this.fetchRequestFor(aRequestId);
             this.requestStateTransitionService()
                     .performTransition(request, stateTransitionTrigger, stateTransitionJustification);
 
@@ -67,7 +75,15 @@ public class RequestResource {
         }
     }
 
-    private Request fetchRequestFromRepository(String aRequestId) {
+    @GET
+    @Path("{requestId}/history")
+    public Response fetchRequestHistory(@PathParam("requestId") String aRequestId) {
+        return Response
+                .ok(this.fetchRequestFor(aRequestId).getStateTransitionHistory())
+                .build();
+    }
+
+    private Request fetchRequestFor(String aRequestId) {
         return this.requestsRepository()
                 .findWithId(aRequestId)
                 .orElseThrow(() -> new WebApplicationException(404));
@@ -79,6 +95,10 @@ public class RequestResource {
 
     private RequestStateTransitionService requestStateTransitionService() {
         return this.requestStateTransitionService;
+    }
+
+    private List<Request> fetchExistingRequests() {
+        return this.requestsRepository().allRequests();
     }
 
     private Response createdResponse(UriInfo uriInfo, String aGeneratedId) {
